@@ -18,15 +18,24 @@ async function github(username, callback) {
 }
 
 function main() {
-    github('PaN8bors', (error, projects) => {
+    github('dylhack', (error, projects) => {
         if (error != undefined) {
             console.log('There was an error!');
             return;
         }
-        for (let project of projects) {
+        const sorted = projects.sort((projectA, projectB) => {
+            if (projectA.stargazers_count>projectB.stargazers_count) {
+                return -1;
+            } else if (projectA.stargazers_count<projectB.stargazers_count) {
+                return 1;
+            } else {
+                return 0;
+            }
+        })
+
+        for (const project of sorted) {
             console.log(`${project.name} has ${project.stargazers_count} stars.`)
         }
-        console.log(data);
     });
 }
 
