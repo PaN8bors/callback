@@ -19,6 +19,10 @@ async function github(username, callback) {
 
 function main() {
     github('PaN8bors', (error, projects) => {
+        if (error != undefined) {
+            console.log('There was an error!');
+            return;
+        }
         for (let project of projects) {
             console.log(`${project.name} has ${project.stargazers_count} stars.`)
         }
